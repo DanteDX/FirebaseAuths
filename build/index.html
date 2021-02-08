@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auth Demo</title>
+    <link rel="stylesheet" href="./index.css" type="text/css" />
+  </head>
+  <body>
+    <div class="authForms">
+      <form id="signUpForm">
+        <p style="text-align: center">Sign Up Form</p>
+        <label for="userEmail">Enter Your Email:</label>
+        <input required id="userEmail" type="email" name="userEmail" />
+        <br /><br />
+        <label for="userPassword">Enter Your Password:</label>
+        <input required id="userPassword" type="text" name="userPassword" />
+        <br /><br />
+        <button type="submit">SIGN UP</button>
+      </form>
+      <br /><br />
+      <form id="signInForm">
+        <p style="text-align: center">Sign In Form</p>
+        <label for="userEmail">Enter Your Email:</label>
+        <input required id="userEmail" type="email" name="userEmail" />
+        <br /><br />
+        <label for="userPassword">Enter Your Password:</label>
+        <input required id="userPassword" type="text" name="userPassword" />
+        <br /><br />
+        <button type="submit">SIGN IN</button>
+      </form>
+      <button id="signOutButton">SIGN OUT USER</button>
+    </div>
+    
+  </body>
+  <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+  <script src="./config.js"></script>
+  <script src="./index.js"></script>
+</html>
