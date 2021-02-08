@@ -1,4 +1,5 @@
 const loggedUser = document.querySelector('#loggedUser');
+const loggedUserSpecial = document.querySelector('#loggedUserSpecial');
 const allBooks = document.querySelector("#allBooks");
 const renderData = () => {
   // creating form to add new book
@@ -50,12 +51,15 @@ signUpForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const email = e.target.userEmail.value;
   const password = e.target.userPassword.value;
+  const special = e.target.userSpecial.value;
   signUpForm.reset();
   try {
     let credentials = await auth.createUserWithEmailAndPassword(
       email,
       password
     );
+    // putting data to 'users' collection in the firestore
+    await db.collection('users').doc(credentials.user.uid).set({email,password,special});
     console.log("*******");
     console.log("New user creation success");
     console.log("Credentials are ", credentials);
@@ -103,8 +107,11 @@ signInForm.addEventListener("submit", async (e) => {
   }
 });
 
-auth.onAuthStateChanged((user) => {
+auth.onAuthStateChanged(async (user) => {
   if (user) {
+    console.log(user.uid);
+    const userInfo = await db.collection('users').doc(user.uid).get();
+    loggedUserSpecial.innerText = userInfo.data().special;
     console.log("*******");
     console.log("From the Auth Tracker");
     console.log("A User has just logged In");
@@ -118,6 +125,7 @@ auth.onAuthStateChanged((user) => {
   } else {
     allBooks.innerHTML = `<div class="eachBook">Log In To See the books!</div>`;
     loggedUser.innerText = "Not Logged In!";
+    loggedUserSpecial.innerText = "";
     loggedUser.style.color = "red";
     console.log("*******");
     console.log("From the Auth Tracker");
