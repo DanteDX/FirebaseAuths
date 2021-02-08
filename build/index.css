@@ -27,7 +27,7 @@
     grid-template-columns: auto auto auto auto;
     grid-column-gap:4px;
     grid-row-gap:3px;
-    padding:4px;
+    padding:7px;
     margin:4px;
     border:1px solid black;
     border-radius: 10px;
@@ -39,7 +39,7 @@
     text-align: center;
     background-color: cadetblue;
     border-radius: 10px;
-    box-shadow: 4px 4px 4px 4px black;
+    box-shadow: 2px 2px 2px 2px black;
     border:1px solid brown;
     font-family:'Times New Roman', Times, serif;
 }
@@ -49,4 +49,19 @@
     bottom:4px;
     right:4px;
     font-weight:bolder;
+}
+
+.addNewBookForm{
+    background-color: cornflowerblue;
+    padding:7px;
+    border:1px solid royalblue;
+    box-shadow: 2px 2px 2px 2px gray;
+    border-radius: 7px;
+}
+
+.addNewBookForm:hover{
+    position:relative;
+    left:3px;
+    top:3px;
+    box-shadow:4px 4px 4px 4px black;
 }

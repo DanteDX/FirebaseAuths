@@ -1,5 +1,26 @@
+const loggedUser = document.querySelector('#loggedUser');
 const allBooks = document.querySelector("#allBooks");
 const renderData = () => {
+  // creating form to add new book
+  allBooks.innerHTML = "";
+  const addBookForm = document.createElement('form');
+  addBookForm.className = "addNewBookForm";
+  addBookForm.innerHTML = 
+    `<label for="newBookName">Book Name: </label>
+    <input id="newBookName" name="newBookName" type="text"/> <br/><br/>
+    <label for="newBookWriter">Book Writer: </label>
+    <input id="newBookWriter" name="newBookWrite" type="text"/><br/><br/>
+    <button type="submit">Add New Book</button>`;
+  addBookForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    const name = e.target.newBookName.value;
+    const writer = e.target.newBookWriter.value;
+    addBookForm.reset();
+    db.collection('books').add({name,writer})
+    renderData();
+  });
+  allBooks.appendChild(addBookForm);
+  //added addNewBookForm to the bookList 
   db.collection("books")
     .get()
     .then((snapshot) => {
@@ -39,6 +60,7 @@ signUpForm.addEventListener("submit", async (e) => {
     console.log("New user creation success");
     console.log("Credentials are ", credentials);
     console.log("user info is ", credentials.user);
+    alert('Signed Up and Logged In!');
   } catch (err) {
     console.log("*******");
     console.log("New User Creation Failed!");
@@ -51,6 +73,9 @@ signOutButton.addEventListener("click", async (e) => {
     await auth.signOut();
     console.log("*******");
     console.log("User Log Out Success");
+    signInForm.style.display = "block";
+    signUpForm.style.display = "block";
+    alert('Log Out Success!');
   } catch (err) {
     console.log("*******");
     console.log("User Logging Out Failed!");
@@ -69,10 +94,12 @@ signInForm.addEventListener("submit", async (e) => {
     console.log("User Logging in success");
     console.log("Credentials are ", credentials);
     console.log("user info is ", credentials.user);
+    alert('You have Logged In!');
   } catch (err) {
     console.log("*******");
     console.log("User Logging in Failed!");
     console.log(err);
+    alert('Invalid Email or Password!');
   }
 });
 
@@ -81,12 +108,20 @@ auth.onAuthStateChanged((user) => {
     console.log("*******");
     console.log("From the Auth Tracker");
     console.log("A User has just logged In");
+    loggedUser.innerText = `Logged In as ${user.email}`;
+    loggedUser.style.color = "blue";
     allBooks.innerHTML = "";
     renderData();
+    signOutButton.style.display = "block";
+    signUpForm.style.display = "none";
+    signInForm.style.display = "none";
   } else {
     allBooks.innerHTML = `<div class="eachBook">Log In To See the books!</div>`;
+    loggedUser.innerText = "Not Logged In!";
+    loggedUser.style.color = "red";
     console.log("*******");
     console.log("From the Auth Tracker");
     console.log("No User is currently Logged in");
+    signOutButton.style.display = "none";
   }
 });
