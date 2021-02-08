@@ -9,6 +9,7 @@
   <body>
     <div id="loggedUser"></div>
     <div id="loggedUserSpecial"></div>
+    <div id="isAdmin"></div>
     <div id="allBooks"></div>
     <div class="authForms">
       <form id="signUpForm">
@@ -36,11 +37,17 @@
         <button type="submit">SIGN IN</button>
       </form>
       <button id="signOutButton">SIGN OUT USER</button>
+      <form id="makeAdminForm" style="display:none;">
+        <label for="newAdminEmail">New Admin Email: </label>
+        <input type="text" id="newAdminEmail" name="newAdminEmail" />
+        <button type="submit">Make Admin</button>
+      </form>
     </div>
   </body>
   <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-functions.js"></script>
   <script src="./config.js"></script>
   <script src="./index.js"></script>
 </html>
